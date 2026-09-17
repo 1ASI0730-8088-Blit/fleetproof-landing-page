@@ -42,3 +42,31 @@ document.addEventListener("keydown", (event) => {
 });
 
 closeMenuOnNavigation();
+
+/* Progressive enhancement: keep content visible without JavaScript. */
+function setupRevealAnimation() {
+    const elements = document.querySelectorAll(".reveal");
+
+    if (!("IntersectionObserver" in window) ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+    }
+
+    document.documentElement.classList.add("js-motion");
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.14, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+}
+
+setupRevealAnimation();
