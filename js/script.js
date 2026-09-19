@@ -600,3 +600,70 @@ document.addEventListener("keydown", (event) => {
     event.preventDefault(); first.focus();
   }
 });
+
+/* Feature 5 / Commit 5 — Integration points with the future Vue Web App.
+   Replace all example URLs with the real deployed routes before acceptance. */
+const APP_ROUTES = {
+  login: "https://YOUR-WEB-APP.example/login",
+  fleetOnboarding: "https://YOUR-WEB-APP.example/onboarding/company",
+  personalReport: "https://YOUR-WEB-APP.example/reports/new",
+  personalPlan: "https://YOUR-WEB-APP.example/subscriptions/personal",
+  starterPlan: "https://YOUR-WEB-APP.example/subscriptions/fleet-starter",
+  businessPlan: "https://YOUR-WEB-APP.example/subscriptions/fleet-business"
+};
+
+const toast = document.getElementById("toast");
+let toastTimeoutId;
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimeoutId);
+  toastTimeoutId = setTimeout(() => toast.classList.remove("show"), 4200);
+}
+
+function routeOrWarn(url) {
+  if (!url || url.includes("YOUR-WEB-APP.example")) {
+    showToast(translations[currentLanguage].routeNotice);
+    return;
+  }
+  try {
+    const target = new URL(url, window.location.href);
+    if (!["http:", "https:"].includes(target.protocol)) throw new Error("Invalid protocol");
+    window.location.assign(target.href);
+  } catch (_) {
+    showToast(translations[currentLanguage].routeNotice);
+  }
+}
+
+function bindAppRoute(selector, routeKey) {
+  const element = document.querySelector(selector);
+  if (!element) return;
+  element.addEventListener("click", (event) => {
+    event.preventDefault();
+    routeOrWarn(APP_ROUTES[routeKey]);
+  });
+}
+
+function configureRoutes() {
+  bindAppRoute("#login-link", "login");
+  bindAppRoute("#header-cta", "fleetOnboarding");
+  bindAppRoute("#fleet-hero-cta", "fleetOnboarding");
+  bindAppRoute("#fleet-solution-cta", "fleetOnboarding");
+  bindAppRoute("#fleet-final-cta", "fleetOnboarding");
+  bindAppRoute("#personal-hero-cta", "personalReport");
+  bindAppRoute("#personal-solution-cta", "personalReport");
+  bindAppRoute("#personal-final-cta", "personalReport");
+
+  const planRoutes = {
+    personal: "personalPlan", starter: "starterPlan", business: "businessPlan"
+  };
+  document.querySelectorAll(".plan-cta").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      routeOrWarn(APP_ROUTES[planRoutes[button.dataset.plan]]);
+    });
+  });
+}
+
+configureRoutes();
