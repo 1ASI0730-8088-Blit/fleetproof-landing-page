@@ -1027,3 +1027,512 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* =======================================
+   SUBSCRIPTION PLANS — FEATURE 4
+   ======================================= */
+
+.plans-v2 {
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+
+/* TÍTULO */
+
+.plans-header {
+  max-width: 720px;
+  margin: 0 auto 70px;
+  text-align: center;
+}
+
+.plans-header .eyebrow {
+  margin-bottom: 12px;
+
+  color: #0b6fe8;
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.plans-header h2 {
+  margin: 0;
+
+  color: #0b2447;
+
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+
+.plans-header > p:last-child {
+  max-width: 620px;
+
+  margin: 16px auto 0;
+
+  color: #64748b;
+
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+
+/* GRID */
+
+.plans-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  align-items: stretch;
+
+  gap: 26px;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+}
+
+
+/* TARJETA */
+
+.plan-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 555px;
+
+  padding: 38px 30px 28px;
+
+  border: 1.5px solid #4b91e7;
+
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 25px rgba(15, 65, 120, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+/* línea azul superior */
+
+.plan-card::before {
+  position: absolute;
+
+  top: -1.5px;
+  left: 28px;
+  right: 28px;
+
+  height: 3px;
+
+  background: #0b6fe8;
+
+  border-radius: 0 0 10px 10px;
+
+  content: "";
+}
+
+
+.plan-card:hover {
+  transform: translateY(-7px);
+
+  border-color: #0b6fe8;
+
+  box-shadow:
+    0 20px 50px rgba(11, 111, 232, 0.14);
+}
+
+
+/* PLAN DESTACADO */
+
+.plan-card-featured {
+  transform: translateY(-15px);
+
+  border: 2px solid #0b6fe8;
+
+  box-shadow:
+    0 20px 55px rgba(11, 111, 232, 0.17);
+}
+
+.plan-card-featured:hover {
+  transform: translateY(-21px);
+}
+
+
+/* BADGES */
+
+.popular-badge,
+.value-badge {
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  padding: 6px 15px;
+
+  border-radius: 999px;
+
+  white-space: nowrap;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+.popular-badge {
+  background: #0b6fe8;
+  color: #ffffff;
+}
+
+
+.value-badge {
+  background: #e9f3ff;
+  color: #0b6fe8;
+
+  border: 1px solid #b7d7ff;
+}
+
+
+/* ICONO */
+
+.plan-icon {
+  display: flex;
+
+  width: 44px;
+  height: 44px;
+
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 10px;
+
+  color: #0b6fe8;
+}
+
+.plan-icon svg {
+  width: 29px;
+  height: 29px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.featured-icon {
+  color: #075fc4;
+}
+
+
+/* NOMBRE DEL PLAN */
+
+.plan-card h3 {
+  margin: 0;
+
+  color: #0b2447;
+
+  font-size: 19px;
+  font-weight: 800;
+
+  text-align: center;
+}
+
+
+/* DESCRIPCIÓN */
+
+.plan-audience {
+  min-height: 48px;
+
+  margin: 8px 0 0;
+
+  color: #718096;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+
+/* PRECIO */
+
+.plan-price {
+  display: flex;
+
+  align-items: baseline;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin: 28px 0 24px;
+}
+
+.plan-price span {
+  color: #071a33;
+  font-family: "Manrope", "Inter", sans-serif;
+
+  font-size: 36px;
+  font-weight: 800;
+
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.plan-price small {
+  color: #718096;
+
+  font-size: 14px;
+}
+
+
+/* LÍNEA AZUL */
+
+.plan-line {
+  width: 100%;
+  height: 1px;
+
+  margin-bottom: 24px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #61a5f5 20%,
+    #0b6fe8 50%,
+    #61a5f5 80%,
+    transparent
+  );
+}
+
+
+/* LISTA DE BENEFICIOS */
+
+.plan-features {
+  display: flex;
+  flex: 1;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin: 0 0 30px;
+  padding: 0;
+
+  list-style: none;
+}
+
+.plan-features li {
+  position: relative;
+
+  padding-left: 28px;
+
+  color: #334155;
+
+  font-size: 14px;
+
+  line-height: 1.45;
+}
+
+
+/* check azul */
+
+.plan-features li::before {
+  position: absolute;
+
+  top: 1px;
+  left: 0;
+
+  display: flex;
+
+  width: 18px;
+  height: 18px;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px solid #0b6fe8;
+
+  border-radius: 50%;
+
+  color: #0b6fe8;
+
+  content: "✓";
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+
+/* BOTONES */
+
+.plan-button {
+  display: flex;
+
+  width: 100%;
+  min-height: 48px;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: auto;
+
+  border-radius: 9px;
+
+  font-family: "Manrope", "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.plan-button:hover {
+  transform: translateY(-2px);
+}
+
+
+/* botón contorno */
+
+.plan-button-outline {
+  border: 1.5px solid #0b6fe8;
+
+  background: #ffffff;
+
+  color: #0b6fe8;
+}
+
+.plan-button-outline:hover {
+  background: #edf6ff;
+
+  box-shadow:
+    0 8px 20px rgba(11, 111, 232, 0.12);
+}
+
+
+/* botón principal */
+
+.plan-button-primary {
+  border: 1.5px solid #0b6fe8;
+
+  background: #0b6fe8;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 20px rgba(11, 111, 232, 0.25);
+}
+
+.plan-button-primary:hover {
+  background: #075fc4;
+
+  box-shadow:
+    0 12px 25px rgba(11, 111, 232, 0.30);
+}
+
+
+/* NOTA INFERIOR */
+
+.plans-footer-note {
+  max-width: 780px;
+
+  margin: 45px auto 0;
+
+  color: #718096;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  text-align: center;
+}
+
+
+/* =======================================
+   TABLET
+   ======================================= */
+
+@media (max-width: 950px) {
+
+  .plans-grid {
+    grid-template-columns: 1fr 1fr;
+
+    max-width: 760px;
+  }
+
+  .plan-card-featured {
+    transform: none;
+  }
+
+  .plan-card-featured:hover {
+    transform: translateY(-7px);
+  }
+
+}
+
+
+/* =======================================
+   MOBILE
+   ======================================= */
+
+@media (max-width: 650px) {
+
+  .plans-v2 {
+    padding: 70px 0;
+  }
+
+  .plans-header {
+    margin-bottom: 45px;
+  }
+
+  .plans-grid {
+    grid-template-columns: 1fr;
+
+    max-width: 430px;
+
+    gap: 35px;
+  }
+
+  .plan-card {
+    min-height: auto;
+
+    padding:
+      34px
+      24px
+      24px;
+  }
+
+  .plan-card-featured {
+    transform: none;
+  }
+
+  .plan-card-featured:hover {
+    transform: translateY(-5px);
+  }
+
+  .plan-price span {
+    font-size: 34px;
+  }
+
+}
