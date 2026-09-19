@@ -393,6 +393,14 @@ const translations = {
 };
 
 
+const planCurrencyFormatter = {
+  en: new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }),
+  es: new Intl.NumberFormat("es-PE", {
+    style: "currency", currency: "PEN",
+    minimumFractionDigits: 0, maximumFractionDigits: 0
+  })
+};
+
 let currentLanguage = "en";
 
 const languageButton = document.getElementById("language-button");
@@ -423,6 +431,11 @@ function translatePage(language) {
   document.querySelectorAll("[data-i18n-alt]").forEach((image) => {
     const value = translations[language][image.dataset.i18nAlt];
     if (value !== undefined) image.setAttribute("alt", value);
+  });
+
+  document.querySelectorAll("[data-price-pen][data-price-usd]").forEach((price) => {
+    const amount = language === "en" ? price.dataset.priceUsd : price.dataset.pricePen;
+    price.textContent = planCurrencyFormatter[language].format(Number(amount));
   });
 
   languageLabel.textContent = language === "en" ? "ES" : "EN";
