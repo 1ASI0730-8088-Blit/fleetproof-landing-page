@@ -1647,3 +1647,21 @@ button {
 @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .final-cta-inner { align-items: flex-start; flex-direction: column; } }
 @media (max-width: 650px) { .final-actions { flex-direction: column; align-items: stretch; } .final-actions .button { width: 100%; } }
 
+.language-button {
+  display: inline-flex;
+  height: 40px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.language-icon {
+  width: 18px;
+  height: 18px;
+}
+
