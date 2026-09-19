@@ -655,6 +655,10 @@
 
     <div class="container footer-bottom">
       <span>© 2026 Blip.</span>
+      <div class="footer-links">
+        <button class="footer-link legal-trigger" type="button" data-legal="terms" data-i18n="terms">Terms</button>
+        <button class="footer-link legal-trigger" type="button" data-legal="privacy" data-i18n="privacy">Privacy</button>
+      </div>
       <span data-i18n="academicNote">Academic working document. Names, prices and metrics require validation.</span>
     </div>
   </footer>
@@ -664,5 +668,13 @@
       JavaScript is disabled. The page remains readable, but the mobile navigation requires JavaScript.
     </div>
   </noscript>
+  
+  <div class="modal-backdrop" id="legal-modal" hidden>
+    <section class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-title" tabindex="-1">
+      <button class="modal-close" type="button" id="modal-close" aria-label="Close dialog">×</button>
+      <div id="legal-content"></div>
+    </section>
+  </div>
+
 </body>
 </html>

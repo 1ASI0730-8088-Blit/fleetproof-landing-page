@@ -454,3 +454,149 @@ try { storedLanguage = localStorage.getItem("fleetproof-language"); } catch (_) 
   // Continue with English as the default language.
 }
 translatePage(storedLanguage === "es" ? "es" : "en");
+
+const legalCopy = {
+  en: {
+    terms: `
+      <h2 id="legal-title">Terms of Service</h2>
+      <p><strong>Academic prototype.</strong> These terms are a starter text for the FleetProof course project and must be reviewed before any real commercial launch.</p>
+
+      <h3>1. Service purpose</h3>
+      <p>FleetProof organizes vehicle checks, evidence, reports, monitoring alerts and resolution cases. It does not issue official certificates and does not replace information published by competent authorities.</p>
+
+      <h3>2. User responsibilities</h3>
+      <ul>
+        <li>Use the service only for legitimate vehicle-management or purchase-evaluation purposes.</li>
+        <li>Do not use FleetProof for harassment, discrimination, unlawful surveillance or improper exposure of personal information.</li>
+        <li>Verify critical decisions against the corresponding official source.</li>
+      </ul>
+
+      <h3>3. Data accuracy</h3>
+      <p>Results may depend on third-party sources, manually entered data or authorized providers. FleetProof must preserve source, consultation date and evidence so users can understand the origin of each result.</p>
+
+      <h3>4. Account and subscription</h3>
+      <p>Plan limits, renewal dates and usage quotas shown in the product form part of the service rules. Final commercial prices are subject to validation.</p>
+
+      <h3>5. Corrections</h3>
+      <p>Users must be given a reasonable mechanism to report an incorrect result and request correction when applicable.</p>
+    `,
+    privacy: `
+      <h2 id="legal-title">Privacy Notice</h2>
+      <p><strong>Academic prototype.</strong> This notice is a starter text for the FleetProof course project and should be adapted to the final implementation and applicable law.</p>
+
+      <h3>1. Data minimization</h3>
+      <p>FleetProof should collect only the account, vehicle and operational information required to deliver reports, monitoring and case-management features.</p>
+
+      <h3>2. Purpose</h3>
+      <p>Information is processed to manage accounts, vehicles, report requests, evidence, subscriptions, alerts and resolution workflows.</p>
+
+      <h3>3. Traceability</h3>
+      <p>Each vehicle result should include the source and consultation date. Sensitive or unnecessary personal information should not be stored.</p>
+
+      <h3>4. User rights</h3>
+      <p>The final product should provide mechanisms for access, correction, export and deletion where applicable.</p>
+
+      <h3>5. Retention and security</h3>
+      <p>The team must define retention periods, access permissions and reasonable security controls before production use.</p>
+    `
+  },
+
+  es: {
+    terms: `
+      <h2 id="legal-title">Términos y condiciones</h2>
+      <p><strong>Prototipo académico.</strong> Este texto es una base para el proyecto FleetProof del curso y debe revisarse antes de cualquier lanzamiento comercial real.</p>
+
+      <h3>1. Propósito del servicio</h3>
+      <p>FleetProof organiza consultas vehiculares, evidencias, reportes, alertas de monitoreo y casos de resolución. No emite certificados oficiales ni reemplaza la información publicada por las autoridades competentes.</p>
+
+      <h3>2. Responsabilidades del usuario</h3>
+      <ul>
+        <li>Usar el servicio únicamente para fines legítimos de gestión vehicular o evaluación de compra.</li>
+        <li>No utilizar FleetProof para acoso, discriminación, vigilancia ilícita o exposición indebida de información personal.</li>
+        <li>Verificar decisiones críticas contra la fuente oficial correspondiente.</li>
+      </ul>
+
+      <h3>3. Exactitud de los datos</h3>
+      <p>Los resultados pueden depender de fuentes de terceros, ingreso manual o proveedores autorizados. FleetProof debe conservar fuente, fecha de consulta y evidencia para que el usuario comprenda el origen de cada resultado.</p>
+
+      <h3>4. Cuenta y suscripción</h3>
+      <p>Los límites del plan, fechas de renovación y cuotas de uso mostradas en el producto forman parte de las reglas del servicio. Los precios comerciales finales están sujetos a validación.</p>
+
+      <h3>5. Correcciones</h3>
+      <p>El usuario debe contar con un mecanismo razonable para reportar un resultado incorrecto y solicitar su corrección cuando corresponda.</p>
+    `,
+    privacy: `
+      <h2 id="legal-title">Aviso de privacidad</h2>
+      <p><strong>Prototipo académico.</strong> Este aviso es una base para el proyecto FleetProof del curso y debe adaptarse a la implementación final y a la normativa aplicable.</p>
+
+      <h3>1. Minimización de datos</h3>
+      <p>FleetProof debe recopilar únicamente la información de cuenta, vehículo y operación necesaria para ofrecer reportes, monitoreo y gestión de casos.</p>
+
+      <h3>2. Finalidad</h3>
+      <p>La información se procesa para administrar cuentas, vehículos, solicitudes de reporte, evidencias, suscripciones, alertas y flujos de resolución.</p>
+
+      <h3>3. Trazabilidad</h3>
+      <p>Cada resultado vehicular debe incluir la fuente y fecha de consulta. No debe almacenarse información personal sensible o innecesaria.</p>
+
+      <h3>4. Derechos del usuario</h3>
+      <p>El producto final debe ofrecer mecanismos de acceso, corrección, exportación y eliminación cuando corresponda.</p>
+
+      <h3>5. Retención y seguridad</h3>
+      <p>El equipo debe definir períodos de retención, permisos de acceso y controles razonables de seguridad antes del uso en producción.</p>
+    `
+  }
+};
+
+
+const legalModal = document.getElementById("legal-modal");
+const legalContent = document.getElementById("legal-content");
+const modalClose = document.getElementById("modal-close");
+let previousFocus = null;
+let activeLegalKind = null;
+
+function openLegalModal(kind) {
+  if (!legalCopy[currentLanguage][kind]) return;
+  previousFocus = document.activeElement;
+  activeLegalKind = kind;
+  legalContent.innerHTML = legalCopy[currentLanguage][kind]; // Static team-authored text only.
+  legalModal.hidden = false;
+  document.body.classList.add("modal-open");
+  modalClose.setAttribute("aria-label", translations[currentLanguage].close);
+  modalClose.focus();
+}
+
+function closeLegalModal() {
+  if (legalModal.hidden) return;
+  legalModal.hidden = true;
+  document.body.classList.remove("modal-open");
+  activeLegalKind = null;
+  if (previousFocus && document.contains(previousFocus)) previousFocus.focus();
+}
+
+document.querySelectorAll(".legal-trigger").forEach((button) => {
+  button.addEventListener("click", () => openLegalModal(button.dataset.legal));
+});
+modalClose.addEventListener("click", closeLegalModal);
+legalModal.addEventListener("click", (event) => {
+  if (event.target === legalModal) closeLegalModal();
+});
+document.addEventListener("keydown", (event) => {
+  if (legalModal.hidden) return;
+  if (event.key === "Escape") {
+    event.preventDefault();
+    closeLegalModal();
+    return;
+  }
+  if (event.key !== "Tab") return;
+  const focusable = [...legalModal.querySelectorAll(
+    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )].filter((element) => element.getClientRects().length > 0);
+  if (!focusable.length) { event.preventDefault(); modalClose.focus(); return; }
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault(); last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault(); first.focus();
+  }
+});
